@@ -1,4 +1,5 @@
 import React from "react";
+import { PostModal } from "../features";
 import { Navbar } from "./Navbar";
 import { Sidebar } from "./Sidebar";
 import { SuggestFollower } from "./SuggestFollower";

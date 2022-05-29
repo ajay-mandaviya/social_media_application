@@ -7,9 +7,8 @@ export const Home = () => {
   const { allPosts } = useSelector((state) => state.post);
   return (
     <div>
-      <PostModal />
       {allPosts?.map((post) => {
-        return <SinglePost key={post?._id} post={post} />;
+        return <SinglePost key={post?._id} posts={post} />;
       })}
     </div>
   );

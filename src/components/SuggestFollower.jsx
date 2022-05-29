@@ -3,12 +3,9 @@ import { useSelector } from "react-redux";
 import { useAuth } from "../features/auth/authSlice";
 
 export const SuggestFollower = () => {
-  // const {user} = useSelector(state => state.)
-
   const { allUsers } = useSelector((state) => state.userProfile);
 
   const { user } = useAuth();
-
   const suggestUserFilter = () => {
     let suggestion;
     suggestion = allUsers.filter(
@@ -19,15 +16,14 @@ export const SuggestFollower = () => {
   };
 
   const suggestUser = suggestUserFilter();
-
   return (
     <ul
       role="list"
-      className=" divide-y bg-white divide-slate-200 sticky top-3 mr-4 w-full mt-4 p-4 "
+      className=" divide-y bg-white divide-slate-200 sticky top-20 mr-4 w-full mt-4 p-4 "
     >
       <p>Suggestions for you</p>
       {suggestUser.length > 0 ? (
-        suggestUser.map((user) => {
+        suggestUser.slice(0, 4).map((user) => {
           return (
             <li className="flex p-2  bg-white mb-2" key={user._id}>
               <img

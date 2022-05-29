@@ -29,7 +29,7 @@ export const users = [
     userBio: "this is adarshbalika you can find me every where as guest",
     userWebsite: "https://adarshbalika.netlify.app",
     profilePic:
-      "https://pbs.twimg.com/profile_images/1521957986335297536/itVSA7l0_400x400.jpg",
+      "https://pbs.twimg.com/profile_images/1421500413174456323/e4ayMO4F_400x400.jpg",
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
@@ -78,6 +78,20 @@ export const users = [
     username: "ankittailor_",
     password: "akkiiii123",
     profilePic: "https://avatars.githubusercontent.com/u/44310861?v=4",
+    userBio: "Building NativeBase ",
+    userWebsite: "https://www.ankittailor.tech/",
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
+  },
+
+  {
+    _id: uuid(),
+    firstName: "Subham ",
+    lastName: "Soni",
+    username: "shubhamsoni",
+    password: "subhamsoni04",
+    profilePic:
+      "https://res.cloudinary.com/dgwzpbj4k/image/upload/v1650457790/baatchit/man_3_dfq8h3.png",
     userBio: "Building NativeBase ",
     userWebsite: "https://www.ankittailor.tech/",
     createdAt: formatDate(),

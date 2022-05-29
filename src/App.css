@@ -38,3 +38,7 @@
     border-width: 1px;
   }
 }
+
+.post-modal {
+  background: rgba(85, 82, 82, 0.5);
+}

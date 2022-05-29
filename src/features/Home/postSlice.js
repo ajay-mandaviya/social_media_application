@@ -1,6 +1,12 @@
 import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
-import { getAllUserApi, getUserPostService } from "../../services";
+import {
+  getAllUserApi,
+  getUserPostService,
+  addUserPostApi,
+  editUserPostApi,
+  deletePostApi,
+} from "../../services";
 import { getAllPostApi } from "../../services/post";
 
 export const getAllPost = createAsyncThunk(
@@ -21,10 +27,50 @@ export const getUserPostThunk = createAsyncThunk(
   async (userName, thunkAPI) => {
     try {
       const respone = await getUserPostService(userName);
-      console.log("repsone getUserPost", respone);
       return respone.data;
     } catch (error) {
       console.log("get error while get user post", error);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const createPostThunk = createAsyncThunk(
+  "post/createPost",
+  async (post, thunkAPI) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await addUserPostApi(token, post);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const editUserPostThunk = createAsyncThunk(
+  "post/editPost",
+  async (post, thunkAPI) => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const response = await editUserPostApi(token, post);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const deletePostThunk = createAsyncThunk(
+  "post/deltePost",
+  async (postId, thunkAPI) => {
+    try {
+      const token = localStorage.getItem("token");
+      const respone = await deletePostApi(token, postId);
+      console.log("responseis delete", respone);
+      return respone.data;
+    } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -59,6 +105,27 @@ const postSlice = createSlice({
     [getUserPostThunk.rejected]: (state) => {
       state.loading = false;
     },
+    [createPostThunk.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [createPostThunk.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.allPosts = action.payload.posts;
+    },
+    [createPostThunk.rejected]: (state, action) => {
+      state.loading = false;
+    },
+    [editUserPostThunk.pending]: (state, action) => {},
+    [editUserPostThunk.fulfilled]: (state, action) => {
+      state.allPosts = action.payload.posts;
+    },
+    [editUserPostThunk.rejected]: (state, action) => {},
+
+    [deletePostThunk.pending]: (state, action) => {},
+    [deletePostThunk.fulfilled]: (state, action) => {
+      state.allPosts = action.payload.posts;
+    },
+    [deletePostThunk.rejected]: (state, action) => {},
   },
 });
 

@@ -78,6 +78,7 @@ export const createPostHandler = function (schema, request) {
       );
     }
     const { postData } = JSON.parse(request.requestBody);
+    console.log("postData in db", postData);
     const post = {
       _id: uuid(),
       ...postData,

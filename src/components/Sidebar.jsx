@@ -1,9 +1,17 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { openModal } from "../features/Home/PostModaSlice";
 
 export const Sidebar = () => {
+  const dispatch = useDispatch();
+
+  const handlePostModal = () => {
+    dispatch(openModal());
+  };
+
   return (
-    <div className="p-2 bg-white border-2 m-auto sticky top-4 mt-4">
+    <div className="p-2 bg-white border-2 m-auto sticky top-20 mt-6">
       <ul>
         <li className="mb-1">
           <NavLink
@@ -58,7 +66,10 @@ export const Sidebar = () => {
           </NavLink>
         </li>
 
-        <button className="p-2 bg-blue-100/70 text-blue-400 hover:bg-blue-200 w-full">
+        <button
+          className="p-2 bg-blue-100/70 text-blue-400 hover:bg-blue-200 w-full"
+          onClick={handlePostModal}
+        >
           Post
         </button>
       </ul>
