@@ -5,10 +5,8 @@ import { useAuth } from "../features/auth/authSlice";
 export const Navbar = () => {
   const { user } = useAuth();
 
-  console.log("profilePic ", user?.profilePic);
-
   return (
-    <div className="flex h-14  bg-slate-300 p-4 justify-between items-center sticky top-0 left-0 z-10">
+    <div className="flex h-14  bg-white shadow-md		 p-4 justify-between items-center sticky top-0 left-0 z-10">
       <div>App Name</div>
       <div>
         <div className="border-2  p-1 ">
