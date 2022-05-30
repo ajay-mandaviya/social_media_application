@@ -7,7 +7,11 @@ import {
   setPostEdit,
   setPostText,
 } from "../features/Home/PostModaSlice";
-import { deletePostThunk } from "../features/Home/postSlice";
+import {
+  deletePostThunk,
+  dislikeUserPost,
+  likeUserPost,
+} from "../features/Home/postSlice";
 
 export const SinglePost = ({ posts }) => {
   const dispatch = useDispatch();
@@ -16,6 +20,12 @@ export const SinglePost = ({ posts }) => {
   const [postOptionVisible, setPostOptionVisible] = useState(false);
   const { isPostEdit } = useSelector((state) => state.postModal);
   const { allUsers } = useSelector((state) => state.userProfile);
+
+  const {
+    likes: { likedBy },
+  } = posts;
+
+  const isPostLike = likedBy.some((like) => like?.username === user.username);
 
   const userProfileInfo = allUsers?.find(
     (user) => user.username === posts.username
@@ -59,6 +69,14 @@ export const SinglePost = ({ posts }) => {
         post: posts,
       })
     );
+  };
+
+  const handleLike = () => {
+    dispatch(likeUserPost(posts?._id));
+  };
+
+  const handleremoveLike = () => {
+    dispatch(dislikeUserPost(posts?._id));
   };
 
   useEffect(() => {
@@ -136,9 +154,17 @@ export const SinglePost = ({ posts }) => {
       <div className="flex items-center py-2">
         <div className="flex justify-between w-1/4	 items-center">
           <div>
-            <button>
-              <i className="fa-solid fa-heart"></i> {posts.likes.likeCount}
-            </button>
+            {isPostLike ? (
+              <button onClick={handleremoveLike}>
+                <i className="fa-solid fa-heart"></i>{" "}
+                {posts.likes.likeCount === 0 ? "" : posts.likes.likeCount}
+              </button>
+            ) : (
+              <button onClick={handleLike}>
+                <i className="fa-regular fa-heart"></i>
+                {posts.likes.likeCount === 0 ? "" : posts.likes.likeCount}
+              </button>
+            )}
           </div>
           <div>
             <button>
