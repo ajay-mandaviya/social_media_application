@@ -2,25 +2,22 @@ import React, { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { useAuth } from "../features/auth/authSlice";
-import {
-  openModal,
-  setPostEdit,
-  setPostText,
-} from "../features/Home/PostModaSlice";
+import { setPostEdit } from "../features/Home/PostModaSlice";
 import {
   deletePostThunk,
   dislikeUserPost,
   likeUserPost,
 } from "../features/Home/postSlice";
+import { addBookMark, removeBookMark } from "../features/Home/postSlice";
 
 export const SinglePost = ({ posts }) => {
   const dispatch = useDispatch();
   const { user } = useAuth();
   const postOptionRef = useRef(null);
   const [postOptionVisible, setPostOptionVisible] = useState(false);
-  const { isPostEdit } = useSelector((state) => state.postModal);
+  // const { isPostEdit } = useSelector((state) => state.postModal);
   const { allUsers } = useSelector((state) => state.userProfile);
-
+  const { bookMark } = useSelector((state) => state.post);
   const {
     likes: { likedBy },
   } = posts;
@@ -29,6 +26,10 @@ export const SinglePost = ({ posts }) => {
 
   const userProfileInfo = allUsers?.find(
     (user) => user.username === posts.username
+  );
+
+  const isInBookMark = bookMark?.some(
+    (bookpost) => bookpost?._id === posts?._id
   );
 
   const monthNames = [
@@ -94,6 +95,27 @@ export const SinglePost = ({ posts }) => {
       document.removeEventListener("mousedown", handleOutSideClick);
     };
   }, [postOptionVisible]);
+
+  const handleAddBookMark = () => {
+    dispatch(addBookMark(posts?._id))
+      .unwrap()
+      .then(() => {
+        toast.success(`Post BookMark SuccessFully`);
+      })
+      .catch((error) => {
+        toast.error("Some thing went wrong");
+      });
+  };
+  const handleRemoveBookMark = () => {
+    dispatch(removeBookMark(posts?._id))
+      .unwrap()
+      .then(() => {
+        toast.success(`Post Remove BookMark SuccessFully`);
+      })
+      .catch((error) => {
+        toast.error("Some thing went wrong");
+      });
+  };
 
   return (
     <div className="p-2 bg-white divide-y divide-stone-200 rounded-lg my-4	">
@@ -167,10 +189,15 @@ export const SinglePost = ({ posts }) => {
             )}
           </div>
           <div>
-            <button>
-              {/* <i class="fa-solid fa-bookmark"></i> */}
-              <i className="fa-regular fa-bookmark"></i>
-            </button>
+            {isInBookMark ? (
+              <button onClick={handleRemoveBookMark}>
+                <i className="fa-solid fa-bookmark"></i>
+              </button>
+            ) : (
+              <button onClick={handleAddBookMark}>
+                <i className="fa-regular fa-bookmark"></i>
+              </button>
+            )}
           </div>
         </div>
         <div className="ml-auto">

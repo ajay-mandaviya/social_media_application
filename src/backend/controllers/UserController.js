@@ -91,6 +91,7 @@ export const getBookmarkPostsHandler = function (schema, request) {
     }
     return new Response(200, {}, { bookmarks: user.bookmarks });
   } catch (error) {
+    console.log("erro in control", error?.message);
     return new Response(
       500,
       {},

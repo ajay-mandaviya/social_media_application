@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import {
   getAllUserApi,
@@ -6,6 +6,9 @@ import {
   addUserPostApi,
   editUserPostApi,
   deletePostApi,
+  getAllBookMarksApi,
+  addBookMarkPostApi,
+  removeBookMarkApi,
 } from "../../services";
 import {
   disLikePostApi,
@@ -108,12 +111,54 @@ export const dislikeUserPost = createAsyncThunk(
   }
 );
 
+export const getBookMarks = createAsyncThunk(
+  "user/getBookMark",
+  async (token, thunkAPI) => {
+    try {
+      const response = await getAllBookMarksApi(token);
+      console.log("book marks", response);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const addBookMark = createAsyncThunk(
+  "post/addBookMark",
+  async (postId, thunkAPI) => {
+    try {
+      const token = localStorage.getItem("token");
+      const respone = await addBookMarkPostApi(token, postId);
+
+      return respone.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const removeBookMark = createAsyncThunk(
+  "post/removeBookMark",
+  async (postId, thunkAPI) => {
+    try {
+      const token = localStorage.getItem("token");
+      const respone = await removeBookMarkApi(token, postId);
+
+      return respone.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 const postSlice = createSlice({
   name: "post",
   initialState: {
     loading: false,
     allPosts: [],
     userPosts: [],
+    bookMark: [],
   },
   reducers: {},
   extraReducers: {
@@ -173,6 +218,24 @@ const postSlice = createSlice({
       state.allPosts = action.payload.posts;
     },
     [dislikeUserPost.rejected]: () => {},
+    [getBookMarks.pending]: (state) => {},
+    [getBookMarks.fulfilled]: (state, action) => {
+      state.bookMark = action.payload.bookmarks;
+    },
+
+    [getBookMarks.rejected]: (state) => {},
+
+    [addBookMark.pending]: (state) => {},
+    [addBookMark.fulfilled]: (state, action) => {
+      state.bookMark = action.payload.bookmarks;
+    },
+    [addBookMark.rejected]: (state) => {},
+
+    [removeBookMark.pending]: (state) => {},
+    [removeBookMark.fulfilled]: (state, action) => {
+      state.bookMark = action.payload.bookmarks;
+    },
+    [removeBookMark.rejected]: (state) => {},
   },
 });
 
