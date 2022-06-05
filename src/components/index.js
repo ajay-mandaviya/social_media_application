@@ -1,3 +1,5 @@
+export { Loader } from "./Loader";
+export { Comment } from "./Comment";
 export { ModalWrapper } from "./ModalWrapper";
 export { Container } from "./Container";
 export { Navbar } from "./Navbar";

@@ -29,15 +29,6 @@ export const posts = [
           downvotedBy: [],
         },
       },
-      {
-        _id: uuid(),
-        username: "sohamshah",
-        text: "Wow!",
-        votes: {
-          upvotedBy: [],
-          downvotedBy: [],
-        },
-      },
     ],
   },
   {
@@ -56,15 +47,6 @@ export const posts = [
         _id: uuid(),
         username: "shubhamsoni",
         text: "Interesting",
-        votes: {
-          upvotedBy: [],
-          downvotedBy: [],
-        },
-      },
-      {
-        _id: uuid(),
-        username: "sohamshah",
-        text: "Wow!",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -96,7 +78,7 @@ export const posts = [
       },
       {
         _id: uuid(),
-        username: "sohamshah",
+        username: "ajay",
         text: "Wow!",
         votes: {
           upvotedBy: [],
@@ -106,5 +88,74 @@ export const posts = [
     ],
     createdAt: "2022-04-28T22:02:14+05:30",
     updatedAt: formatDate(),
+  },
+  {
+    _id: uuid(),
+    content: "People working in software firms don't repair printers",
+    likes: {
+      likeCount: 2,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    username: "guest123",
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
+    comments: [
+      {
+        _id: uuid(),
+        username: "ajay",
+        text: "People working in software firms don't repair printers",
+        votes: {
+          upvotedBy: [],
+          downvotedBy: [],
+        },
+      },
+    ],
+  },
+  {
+    _id: uuid(),
+    content: "Sometimes I think my list of enemies is too short, so … ",
+    likes: {
+      likeCount: 2,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    username: "elonmusk",
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
+    comments: [
+      {
+        _id: uuid(),
+        username: "shubhamsoni",
+        text: "Interesting",
+        votes: {
+          upvotedBy: [],
+          downvotedBy: [],
+        },
+      },
+    ],
+  },
+  {
+    _id: uuid(),
+    content: "Someone is special only if you tell them.",
+    likes: {
+      likeCount: 10,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    username: "ankittailor_",
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
+    comments: [
+      {
+        _id: uuid(),
+        username: "ajay",
+        text: "Magic is just another word for cool features 😁",
+        votes: {
+          upvotedBy: [],
+          downvotedBy: [],
+        },
+      },
+    ],
   },
 ];

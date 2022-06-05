@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { useAuth } from "../features/auth/authSlice";
 import { setPostEdit } from "../features/Home/PostModaSlice";
 import {
@@ -15,7 +16,7 @@ export const SinglePost = ({ posts }) => {
   const { user } = useAuth();
   const postOptionRef = useRef(null);
   const [postOptionVisible, setPostOptionVisible] = useState(false);
-  // const { isPostEdit } = useSelector((state) => state.postModal);
+
   const { allUsers } = useSelector((state) => state.userProfile);
   const { bookMark } = useSelector((state) => state.post);
   const {
@@ -134,7 +135,7 @@ export const SinglePost = ({ posts }) => {
             {userProfileInfo?.firstName} {userProfileInfo?.lastName}
           </p>
           <div className="flex">
-            <p className="text-sm text-gray-400 ">{posts.username} </p>
+            <p className="text-sm text-gray-400 ">@{posts.username} </p>
             <p className="text-sm text-gray-400 ml-2">
               {" "}
               {`${date.getDate()} ${monthNames[date.getMonth()]}`}
@@ -169,10 +170,9 @@ export const SinglePost = ({ posts }) => {
           </div>
         )}
       </div>
-
-      <div className="py-2">
+      <Link to={`/post/${posts._id}`} className="py-2 cursor-default">
         <p>{posts.content}</p>
-      </div>
+      </Link>
       <div className="flex items-center py-2">
         <div className="flex justify-between w-1/4	 items-center">
           <div>
@@ -201,10 +201,8 @@ export const SinglePost = ({ posts }) => {
           </div>
         </div>
         <div className="ml-auto">
-          <button>
-            coments
-            <i className="fa-solid fa-message-quote"></i>
-          </button>
+          coments
+          <i className="fa-solid fa-message-quote"></i>
         </div>
       </div>
     </div>

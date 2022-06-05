@@ -51,16 +51,16 @@ export const addPostCommentHandler = function (schema, request) {
 
     const comment = {
       _id: uuid(),
-      ...commentData,
+      text: commentData,
       username: user.username,
       votes: { upvotedBy: [], downvotedBy: [] },
       createdAt: formatDate(),
       updatedAt: formatDate(),
     };
     const post = schema.posts.findBy({ _id: postId }).attrs;
-    post.comments.push(comment);
+    post.comments.unshift(comment);
     this.db.posts.update({ _id: postId }, post);
-    return new Response(201, {}, { comments: post.comments });
+    return new Response(201, {}, { posts: this.db.posts });
   } catch (error) {
     return new Response(
       500,
@@ -106,11 +106,11 @@ export const editPostCommentHandler = function (schema, request) {
     }
     post.comments[commentIndex] = {
       ...post.comments[commentIndex],
-      ...commentData,
+      text: commentData,
       updatedAt: formatDate(),
     };
     this.db.posts.update({ _id: postId }, post);
-    return new Response(201, {}, { comments: post.comments });
+    return new Response(201, {}, { posts: this.db.posts });
   } catch (error) {
     return new Response(
       500,
@@ -128,6 +128,7 @@ export const editPostCommentHandler = function (schema, request) {
  * */
 
 export const deletePostCommentHandler = function (schema, request) {
+  const { postId, commentId } = request.params;
   const user = requiresAuth.call(this, request);
   try {
     if (!user) {
@@ -141,11 +142,12 @@ export const deletePostCommentHandler = function (schema, request) {
         }
       );
     }
-    const { postId, commentId } = request.params;
+
     const post = schema.posts.findBy({ _id: postId }).attrs;
     const commentIndex = post.comments.findIndex(
       (comment) => comment._id === commentId
     );
+
     if (
       post.comments[commentIndex].username !== user.username &&
       post.username !== user.username
@@ -160,8 +162,9 @@ export const deletePostCommentHandler = function (schema, request) {
       (comment) => comment._id !== commentId
     );
     this.db.posts.update({ _id: postId }, post);
-    return new Response(201, {}, { comments: post.comments });
+    return new Response(201, {}, { posts: this.db.posts });
   } catch (error) {
+    console.log("errro in controler");
     return new Response(
       500,
       {},

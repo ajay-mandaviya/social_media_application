@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
-import { loginWithUserApi, signupUserApi } from "../../services";
+import { loginWithUserApi, signupUserApi, editUserApi } from "../../services";
 
 export const loginUserThunk = createAsyncThunk(
   "auth/login",
@@ -22,6 +22,20 @@ export const signupThunk = createAsyncThunk(
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const updateUser = createAsyncThunk(
+  "auth/editUser",
+  async (updateUser, thunkAPI) => {
+    try {
+      console.log("updateUser", updateUser);
+      const token = localStorage.getItem("token");
+      const response = await editUserApi(token, updateUser);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
     }
   }
 );
@@ -64,6 +78,12 @@ const authSlice = createSlice({
     [signupThunk.rejected]: (state, action) => {
       state.loading = false;
     },
+    [updateUser.pending]: (state, action) => {},
+    [updateUser.fulfilled]: (state, { payload }) => {
+      state.user = payload.user;
+      localStorage.setItem("user", JSON.stringify(payload.user));
+    },
+    [updateUser.rejected]: (state, action) => {},
   },
 });
 

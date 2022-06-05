@@ -65,3 +65,7 @@ export const disLikePostApi = (token, postID) => {
     }
   );
 };
+
+export const getSinglePostApi = (postId) => {
+  return axios.get(`/api/posts/${postId}`);
+};

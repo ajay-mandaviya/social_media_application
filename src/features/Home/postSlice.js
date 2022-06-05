@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import {
-  getAllUserApi,
   getUserPostService,
   addUserPostApi,
   editUserPostApi,
@@ -9,6 +8,10 @@ import {
   getAllBookMarksApi,
   addBookMarkPostApi,
   removeBookMarkApi,
+  getSinglePostApi,
+  addPostCommentAPi,
+  editPostCommentAPi,
+  deletePostCommentAPi,
 } from "../../services";
 import {
   disLikePostApi,
@@ -104,8 +107,10 @@ export const dislikeUserPost = createAsyncThunk(
     try {
       const token = localStorage.getItem("token");
       const respone = await disLikePostApi(token, postId);
+      console.log("dislikeUserPost", respone);
       return respone.data;
     } catch (error) {
+      console.log("error", error);
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -152,6 +157,64 @@ export const removeBookMark = createAsyncThunk(
   }
 );
 
+export const addComment = createAsyncThunk(
+  "comment/addComment",
+  async ({ postId, commentData, token }, thunkAPI) => {
+    try {
+      const respone = await addPostCommentAPi(postId, commentData, token);
+      return respone.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const editComment = createAsyncThunk(
+  "comment/editComment",
+  async ({ postId, commentId, commentData, token }, thunkAPI) => {
+    console.log("postId", postId, "commentData", commentData, "rtoken", token);
+    try {
+      const response = await editPostCommentAPi(
+        postId,
+        commentId,
+        commentData,
+        token
+      );
+      console.log("edit coomet response", response);
+      return response.data;
+    } catch (error) {
+      console.error(error.response.data);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const deleteComment = createAsyncThunk(
+  "comment/deleteComment",
+  async ({ postId, commentId, token }, thunkAPI) => {
+    try {
+      const respone = await deletePostCommentAPi(postId, commentId, token);
+      return respone.data;
+    } catch (error) {
+      console.error(error.message);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const getsinglePost = createAsyncThunk(
+  "post/singlePost",
+  async (id, thunkAPI) => {
+    try {
+      const response = await getSinglePostApi(id);
+      console.log("single psot", response.data);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 const postSlice = createSlice({
   name: "post",
   initialState: {
@@ -159,6 +222,7 @@ const postSlice = createSlice({
     allPosts: [],
     userPosts: [],
     bookMark: [],
+    post: null,
   },
   reducers: {},
   extraReducers: {
@@ -236,6 +300,32 @@ const postSlice = createSlice({
       state.bookMark = action.payload.bookmarks;
     },
     [removeBookMark.rejected]: (state) => {},
+    // post
+    [getsinglePost.pending]: (state) => {
+      state.loading = true;
+    },
+    [getsinglePost.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.post = action.payload.post;
+    },
+    [getsinglePost.rejected]: (state, action) => {
+      state.loading = false;
+    },
+    [addComment.pending]: (state) => {},
+    [addComment.fulfilled]: (state, action) => {
+      state.allPosts = action.payload.posts;
+    },
+    [addComment.rejected]: (state) => {},
+    [editComment.pending]: () => {},
+    [editComment.fulfilled]: (state, action) => {
+      state.allPosts = action.payload.posts;
+    },
+    [editComment.rejected]: () => {},
+    [deleteComment.pending]: () => {},
+    [deleteComment.fulfilled]: (state, action) => {
+      state.allPosts = action.payload.posts;
+    },
+    [deleteComment.rejected]: () => {},
   },
 });
 

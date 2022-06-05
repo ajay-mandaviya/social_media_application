@@ -61,9 +61,9 @@ export const Signup = () => {
   };
 
   useEffect(() => {
-    if (token) {
-      navigate("/");
-    }
+    // sif (token)      {
+    //   navigate("/");
+    // }
   }, [token]);
 
   return (
