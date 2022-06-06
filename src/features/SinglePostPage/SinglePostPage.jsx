@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { SinglePost, Comment } from "../../components";
@@ -23,7 +22,11 @@ export const SinglePostPage = () => {
       {post && (
         <div className="flex justify-between items-center bg-white p-2">
           {user?.profilePic ? (
-            <img src={user?.profilePic} className="w-7 h-7 rounded-full" />
+            <img
+              src={user?.profilePic}
+              className="w-7 h-7 rounded-full"
+              alt="profile img"
+            />
           ) : (
             <div className="w-7 h-7  text-xl flex items-center justify-center font-semibold rounded-full bg-blue-400 text-white">
               {user?.firstName[0]?.toUpperCase()}

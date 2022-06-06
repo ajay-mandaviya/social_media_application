@@ -15,24 +15,7 @@ const Comment = ({ comment, postId }) => {
   const [postOptionVisible, setPostOptionVisible] = useState(false);
   const [isedit, setIsEdit] = useState(false);
   const [editCommentText, setEditCommetText] = useState("");
-  const monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
 
-  console.log();
-
-  // const date = new Date(posts.createdAt);
   const handleEditPost = () => {
     setPostOptionVisible(!postOptionVisible);
   };

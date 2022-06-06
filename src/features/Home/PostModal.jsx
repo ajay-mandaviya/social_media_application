@@ -1,12 +1,7 @@
 import React from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  closeModal,
-  openModal,
-  setPostEdit,
-  setPostText,
-} from "./PostModaSlice";
+import { closeModal, setPostEdit, setPostText } from "./PostModaSlice";
 import { createPostThunk, editUserPostThunk } from "./postSlice";
 
 export const PostModal = () => {

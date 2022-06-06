@@ -79,6 +79,7 @@ export const UsersProfile = () => {
               href={singleUser?.userWebsite}
               className="text-blue-600 hover:underline decoration-1 break-all"
               target="_blank"
+              rel="noreferrer"
             >
               {singleUser?.userWebsite}
             </a>

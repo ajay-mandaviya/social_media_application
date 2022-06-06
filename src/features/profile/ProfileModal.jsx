@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { updateUser, useAuth } from "../auth/authSlice";
-import { closeEditModal, openEditModal } from "./userProfileSlice";
+import { closeEditModal } from "./userProfileSlice";
 const ProfileModal = () => {
   const dispatch = useDispatch();
   const { user } = useAuth();

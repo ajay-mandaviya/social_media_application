@@ -67,6 +67,7 @@ export const Signup = () => {
     if (token) {
       navigate("/");
     }
+    //eslint-disable-next-line
   }, [token]);
 
   return (

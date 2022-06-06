@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SinglePost } from "../../components";
 import { useAuth } from "../auth/authSlice";
 import { getUserPostThunk } from "../Home/postSlice";
 import ProfileModal from "./ProfileModal";
-import { openEditModal, closeEditModal } from "./userProfileSlice";
+import { openEditModal } from "./userProfileSlice";
 export const Profile = () => {
   const dispatch = useDispatch();
   const { user } = useAuth();

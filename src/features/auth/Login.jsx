@@ -69,6 +69,7 @@ export const Login = () => {
     if (token) {
       navigate("/");
     }
+    //eslint-disable-next-line
   }, [token]);
 
   return (
