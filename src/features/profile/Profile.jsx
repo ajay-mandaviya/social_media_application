@@ -19,7 +19,13 @@ export const Profile = () => {
       <div className="">
         <div className="bg-white p-4 flex">
           <div>
-            <img src={user?.profilePic} className="w-16 h-16 rounded-full" />
+            {user?.profilePic ? (
+              <img src={user?.profilePic} className="w-16 h-16 rounded-full" />
+            ) : (
+              <div className="w-16 h-16  text-xl flex items-center justify-center font-semibold rounded-full bg-blue-400 text-white">
+                {user?.firstName[0]?.toUpperCase()}
+              </div>
+            )}
           </div>
           <div className="ml-4">
             <div className="flex justify-between  mb-2">

@@ -7,6 +7,7 @@ import {
   Home,
   Login,
   PostModal,
+  PrivateRoute,
   Profile,
   Signup,
   UsersProfile,
@@ -19,7 +20,6 @@ import { getUserPostThunk } from "./features/Home/postSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUserThunk } from "./features/profile/userProfileSlice";
 import { SinglePostPage } from "./features/SinglePostPage/SinglePostPage";
-
 function App() {
   const dispatch = useDispatch();
   const { isModalVisible } = useSelector((state) => state.postModal);
@@ -53,50 +53,62 @@ function App() {
         <Route
           path="/"
           element={
-            <Container>
-              <Home />
-            </Container>
+            <PrivateRoute>
+              <Container>
+                <Home />
+              </Container>
+            </PrivateRoute>
           }
         />
         <Route
           path="/explore"
           element={
-            <Container>
-              <Explore />
-            </Container>
+            <PrivateRoute>
+              <Container>
+                <Explore />
+              </Container>
+            </PrivateRoute>
           }
         />
         <Route
           path="/bookmarks"
           element={
-            <Container>
-              <BookMark />
-            </Container>
+            <PrivateRoute>
+              <Container>
+                <BookMark />
+              </Container>
+            </PrivateRoute>
           }
         />
         <Route
           path="/profile"
           element={
-            <Container>
-              <Profile />
-            </Container>
+            <PrivateRoute>
+              <Container>
+                <Profile />
+              </Container>
+            </PrivateRoute>
           }
         />
         <Route
           path="/user/:username"
           element={
-            <Container>
-              <UsersProfile />
-            </Container>
+            <PrivateRoute>
+              <Container>
+                <UsersProfile />
+              </Container>
+            </PrivateRoute>
           }
         />
         <Route
           exact
           path="/post/:id"
           element={
-            <Container>
-              <SinglePostPage />
-            </Container>
+            <PrivateRoute>
+              <Container>
+                <SinglePostPage />
+              </Container>
+            </PrivateRoute>
           }
         />
         <Route path="/login" element={<Login />} />

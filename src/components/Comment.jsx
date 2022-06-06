@@ -86,15 +86,17 @@ const Comment = ({ comment, postId }) => {
   return (
     <div className="bg-white divide-y my-4">
       <div className="flex p-2 mb-2">
-        <img
-          className="h-10 w-10 rounded-full"
-          src={
-            userProfileInfo?.profilePic
-              ? `${userProfileInfo?.profilePic}`
-              : "https://res.cloudinary.com/dgwzpbj4k/image/upload/v1650457790/baatchit/woman_ojbd7v.png"
-          }
-          alt="profilePic"
-        />
+        {userProfileInfo?.profilePic ? (
+          <img
+            className="h-10 w-10 rounded-full"
+            src={`${userProfileInfo?.profilePic}`}
+            alt="profilePic"
+          />
+        ) : (
+          <div className="h-10 w-10  text-xl flex items-center justify-center font-semibold rounded-full bg-blue-400 text-white">
+            {userProfileInfo?.firstName[0]?.toUpperCase()}
+          </div>
+        )}
         <div className="ml-3 overflow-hidden">
           <p className="text-sm font-bold text-slate-900">
             {userProfileInfo?.firstName} {userProfileInfo?.lastName}

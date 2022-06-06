@@ -21,7 +21,7 @@ export const followUser = createAsyncThunk(
       console.log("dispatch", dispatch);
       const token = localStorage.getItem("token");
       const response = await followUserApi(id, token);
-      dispatch(updateUser({ updateUser: response.data.user }));
+      dispatch(updateUser(response.data.user));
       return response.data;
     } catch (error) {
       console.log("follow error", error.response.data);
@@ -36,7 +36,7 @@ export const unfollowUser = createAsyncThunk(
     try {
       const token = localStorage.getItem("token");
       const response = await unfollowUserApi(id, token);
-      dispatch(updateUser({ updateUser: response.data.user }));
+      dispatch(updateUser(response.data.user));
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);

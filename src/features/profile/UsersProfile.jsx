@@ -43,6 +43,7 @@ export const UsersProfile = () => {
     }
   };
 
+  console.log("singleUser", singleUser);
   return (
     <>
       <div className="">

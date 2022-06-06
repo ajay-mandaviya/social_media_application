@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../features/auth/authSlice";
 import { setPostEdit } from "../features/Home/PostModaSlice";
 import {
@@ -14,6 +14,10 @@ import { addBookMark, removeBookMark } from "../features/Home/postSlice";
 export const SinglePost = ({ posts }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  console.log("path name", pathname);
+
   const { user } = useAuth();
   const postOptionRef = useRef(null);
   const [postOptionVisible, setPostOptionVisible] = useState(false);
@@ -55,14 +59,10 @@ export const SinglePost = ({ posts }) => {
   };
 
   const deletePost = () => {
-    dispatch(deletePostThunk(posts._id))
-      .unwrap()
-      .then(() => {
-        toast.success(`Post Delete SuccessFully`);
-      })
-      .catch(() => {
-        toast.error("Some thing went wrong");
-      });
+    dispatch(deletePostThunk(posts._id));
+    if (pathname.includes("post")) {
+      navigate("/");
+    }
   };
 
   const editPost = () => {
@@ -122,7 +122,19 @@ export const SinglePost = ({ posts }) => {
   return (
     <div className="p-2 bg-white divide-y divide-stone-200 rounded-lg my-4	">
       <div className="flex p-2 mb-2">
-        <img
+        {userProfileInfo?.profilePic ? (
+          <img
+            src={userProfileInfo?.profilePic}
+            alt={`${userProfileInfo?.username}`}
+            className="w-10 h-10 rounded-full"
+          />
+        ) : (
+          <div className="w-10 h-10  text-xl flex items-center justify-center font-semibold rounded-full bg-blue-400 text-white">
+            {user?.firstName[0]?.toUpperCase()}
+          </div>
+        )}
+
+        {/* <img
           className="h-10 w-10 rounded-full"
           src={
             userProfileInfo?.profilePic
@@ -130,7 +142,7 @@ export const SinglePost = ({ posts }) => {
               : "https://res.cloudinary.com/dgwzpbj4k/image/upload/v1650457790/baatchit/woman_ojbd7v.png"
           }
           alt="profilePic"
-        />
+        /> */}
         <div
           className="ml-3 overflow-hidden cursor-default"
           onClick={() =>
@@ -181,7 +193,7 @@ export const SinglePost = ({ posts }) => {
       <Link to={`/post/${posts._id}`} className="py-2 cursor-default">
         <p>{posts.content}</p>
       </Link>
-      <div className="flex items-center py-2">
+      <div className="flex items-center">
         <div className="flex justify-between w-1/4	 items-center">
           <div>
             {isPostLike ? (

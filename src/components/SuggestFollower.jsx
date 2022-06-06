@@ -22,6 +22,7 @@ export const SuggestFollower = () => {
     return suggestUser;
   };
   let suggestion = getSuggest();
+  console.log("suggestion", suggestion);
 
   const handleFollow = (id) => {
     dispatch(followUser({ id, dispatch }))
