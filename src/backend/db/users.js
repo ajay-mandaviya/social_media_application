@@ -26,7 +26,7 @@ export const users = [
     lastName: "mandaviya",
     username: "ajay",
     password: "ajay123",
-    userBio: "this is adarshbalika you can find me every where as guest",
+    userBio: "Learning ReactJS",
     following: [
       {
         _id: uuid(),

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../features/auth/authSlice";
 import { setPostEdit } from "../features/Home/PostModaSlice";
 import {
@@ -13,6 +13,7 @@ import { addBookMark, removeBookMark } from "../features/Home/postSlice";
 
 export const SinglePost = ({ posts }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { user } = useAuth();
   const postOptionRef = useRef(null);
   const [postOptionVisible, setPostOptionVisible] = useState(false);
@@ -130,7 +131,14 @@ export const SinglePost = ({ posts }) => {
           }
           alt="profilePic"
         />
-        <div className="ml-3 overflow-hidden">
+        <div
+          className="ml-3 overflow-hidden cursor-default"
+          onClick={() =>
+            user.username === userProfileInfo?.username
+              ? navigate("/profile")
+              : navigate(`/user/${userProfileInfo?.username}`)
+          }
+        >
           <p className="text-sm font-bold text-slate-900">
             {userProfileInfo?.firstName} {userProfileInfo?.lastName}
           </p>
@@ -200,10 +208,10 @@ export const SinglePost = ({ posts }) => {
             )}
           </div>
         </div>
-        <div className="ml-auto">
-          coments
-          <i className="fa-solid fa-message-quote"></i>
-        </div>
+
+        <Link to={`/post/${posts._id}`} className="py-2 cursor-default ml-auto">
+          <i className="fa-regular fa-comment-dots"></i>
+        </Link>
       </div>
     </div>
   );

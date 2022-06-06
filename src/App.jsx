@@ -9,6 +9,7 @@ import {
   PostModal,
   Profile,
   Signup,
+  UsersProfile,
 } from "./features";
 import { Toaster } from "react-hot-toast";
 import { Container } from "./components";
@@ -78,6 +79,14 @@ function App() {
           element={
             <Container>
               <Profile />
+            </Container>
+          }
+        />
+        <Route
+          path="/user/:username"
+          element={
+            <Container>
+              <UsersProfile />
             </Container>
           }
         />

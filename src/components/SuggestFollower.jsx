@@ -1,21 +1,23 @@
 import React from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../features/auth/authSlice";
 import { followUser } from "../features/profile/userProfileSlice";
 
 export const SuggestFollower = () => {
   const dispatch = useDispatch();
   const { allUsers } = useSelector((state) => state.userProfile);
-
+  const navigate = useNavigate();
   const { user } = useAuth();
-
   const getSuggest = () => {
     let suggestUser = allUsers
       .filter((current) => current.username !== user.username)
       .filter(
         (ele) =>
-          !user.following.find((followingUsr) => followingUsr._id === ele._id)
+          !user.following.find(
+            (followingUsr) => followingUsr.username === ele.username
+          )
       );
     return suggestUser;
   };
@@ -50,7 +52,10 @@ export const SuggestFollower = () => {
                 }
                 alt="suggest"
               />
-              <div className="ml-3 overflow-hidden">
+              <div
+                className="ml-3 overflow-hidden cursor-pointer"
+                onClick={() => navigate(`/user/${user?.username}`)}
+              >
                 <p className="text-sm font-bold text-slate-900">
                   {user?.firstName} {user?.lastName}
                 </p>
