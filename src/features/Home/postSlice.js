@@ -7,7 +7,11 @@ import {
   editUserPostApi,
   deletePostApi,
 } from "../../services";
-import { getAllPostApi } from "../../services/post";
+import {
+  disLikePostApi,
+  getAllPostApi,
+  likePostApi,
+} from "../../services/post";
 
 export const getAllPost = createAsyncThunk(
   "post/getAllPosts",
@@ -76,6 +80,34 @@ export const deletePostThunk = createAsyncThunk(
   }
 );
 
+export const likeUserPost = createAsyncThunk(
+  "post/likePost",
+  async (postID, thunkAPI) => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const respone = await likePostApi(token, postID);
+      return respone.data;
+    } catch (error) {
+      console.log("werro in thunk ", error);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const dislikeUserPost = createAsyncThunk(
+  "post/disLikePost",
+  async (postId, thunkAPI) => {
+    try {
+      const token = localStorage.getItem("token");
+      const respone = await disLikePostApi(token, postId);
+      return respone.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 const postSlice = createSlice({
   name: "post",
   initialState: {
@@ -105,6 +137,7 @@ const postSlice = createSlice({
     [getUserPostThunk.rejected]: (state) => {
       state.loading = false;
     },
+    // create
     [createPostThunk.pending]: (state, action) => {
       state.loading = true;
     },
@@ -115,17 +148,31 @@ const postSlice = createSlice({
     [createPostThunk.rejected]: (state, action) => {
       state.loading = false;
     },
+    // edit
     [editUserPostThunk.pending]: (state, action) => {},
     [editUserPostThunk.fulfilled]: (state, action) => {
       state.allPosts = action.payload.posts;
     },
     [editUserPostThunk.rejected]: (state, action) => {},
 
+    // delte post
     [deletePostThunk.pending]: (state, action) => {},
     [deletePostThunk.fulfilled]: (state, action) => {
       state.allPosts = action.payload.posts;
     },
     [deletePostThunk.rejected]: (state, action) => {},
+    // like
+    [likeUserPost.pending]: (state, action) => {},
+    [likeUserPost.fulfilled]: (state, action) => {
+      state.allPosts = action.payload.posts;
+    },
+    [likeUserPost.rejected]: (state, action) => {},
+    // dislike
+    [dislikeUserPost.pending]: () => {},
+    [dislikeUserPost.fulfilled]: (state, action) => {
+      state.allPosts = action.payload.posts;
+    },
+    [dislikeUserPost.rejected]: () => {},
   },
 });
 

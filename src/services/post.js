@@ -21,7 +21,6 @@ export const addUserPostApi = (token, postData) => {
 };
 
 export const editUserPostApi = (token, postData) => {
-  console.log("postData  editUserPostApi", postData);
   return axios.post(
     `/api/posts/edit/${postData?._id}`,
     {
@@ -36,10 +35,33 @@ export const editUserPostApi = (token, postData) => {
 };
 
 export const deletePostApi = (token, postId) => {
-  console.log("postdata deletePostApi", postId);
   return axios.delete(`/api/posts/${postId}`, {
     headers: {
       authorization: token,
     },
   });
+};
+
+export const likePostApi = (token, postId) => {
+  return axios.post(
+    `/api/posts/like/${postId}`,
+    {},
+    {
+      headers: {
+        authorization: token,
+      },
+    }
+  );
+};
+
+export const disLikePostApi = (token, postID) => {
+  return axios.post(
+    `api/posts/dislike/${postID}`,
+    {},
+    {
+      headers: {
+        authorization: token,
+      },
+    }
+  );
 };
