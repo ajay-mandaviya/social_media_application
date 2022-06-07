@@ -1,8 +1,8 @@
-# My Stream Social Media Application
+# Social Media Application
 
 Application Link
 
-[My Stream](https://my-stream.netlify.app/)
+[My Stream]()
 
 # Built with
 
