@@ -1,5 +1,5 @@
 import React from "react";
-const Loader = () => {
+export const Loader = () => {
   return (
     <div className="loader-body">
       <div className="spinner">
@@ -9,5 +9,3 @@ const Loader = () => {
     </div>
   );
 };
-
-export default Loader;

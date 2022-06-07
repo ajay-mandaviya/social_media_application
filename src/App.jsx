@@ -17,21 +17,18 @@ import { useAuth } from "./features/auth/authSlice";
 import { getUserPostThunk } from "./features/Home/postSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUserThunk } from "./features/profile/userProfileSlice";
+import { SinglePostPage } from "./features/SinglePostPage/SinglePostPage";
 
 function App() {
   const dispatch = useDispatch();
   const { isModalVisible } = useSelector((state) => state.postModal);
-  console.log("isModalVisible", isModalVisible);
-  const {
-    token,
-    user: { username },
-  } = useAuth();
+  const { token, user } = useAuth();
 
   useEffect(() => {
     if (token) {
       dispatch(getAllUserThunk());
       dispatch(getAllPost());
-      dispatch(getUserPostThunk(username));
+      dispatch(getUserPostThunk(user?.username));
     }
   }, [token]);
 
@@ -81,6 +78,15 @@ function App() {
           element={
             <Container>
               <Profile />
+            </Container>
+          }
+        />
+        <Route
+          exact
+          path="/post/:id"
+          element={
+            <Container>
+              <SinglePostPage />
             </Container>
           }
         />
