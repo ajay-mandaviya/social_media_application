@@ -6,7 +6,6 @@ export const getAllUserThunk = createAsyncThunk(
   async (_, thunkApi) => {
     try {
       const response = await getAllUserApi();
-      console.log("response all user", response);
       return response.data;
     } catch (error) {
       return thunkApi.rejectWithValue(error);
@@ -18,13 +17,11 @@ export const followUser = createAsyncThunk(
   "user/follow",
   async ({ id, dispatch }, thunkAPI) => {
     try {
-      console.log("dispatch", dispatch);
       const token = localStorage.getItem("token");
       const response = await followUserApi(id, token);
       dispatch(updateUser(response.data.user));
       return response.data;
     } catch (error) {
-      console.log("follow error", error.response.data);
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }

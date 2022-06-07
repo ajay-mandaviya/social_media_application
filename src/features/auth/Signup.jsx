@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { Input } from "../../components";
+import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 import { signupThunk } from "./authSlice";
 import { signupValidate } from "./validateForm";
 
@@ -62,6 +63,8 @@ export const Signup = () => {
       confirmPasswordError: "",
     });
   };
+
+  useDocumentTitle("Signup");
 
   useEffect(() => {
     if (token) {

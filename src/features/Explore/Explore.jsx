@@ -1,9 +1,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { SinglePost } from "../../components";
+import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 
 export const Explore = () => {
   const { allPosts } = useSelector((state) => state.post);
+
+  useDocumentTitle("Explore");
 
   return (
     <div>

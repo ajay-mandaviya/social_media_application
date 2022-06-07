@@ -30,7 +30,6 @@ export const updateUser = createAsyncThunk(
   "auth/editUser",
   async (updateUser, thunkAPI) => {
     try {
-      console.log("updateUser", updateUser);
       const token = localStorage.getItem("token");
       const response = await editUserApi(token, updateUser);
       return response.data;

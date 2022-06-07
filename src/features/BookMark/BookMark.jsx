@@ -1,12 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 import BookMarkCard from "./BookMarkCard";
 export const BookMark = () => {
-  const { bookMark } = useSelector((state) => state.post);
+  const { bookmarks } = useSelector((state) => state.post);
+  useDocumentTitle("BookMark");
   return (
     <div>
-      {bookMark.length > 0 ? (
-        bookMark?.map((posts) => {
+      {bookmarks.length > 0 ? (
+        bookmarks?.map((posts) => {
           return <BookMarkCard key={posts?._id} posts={posts} />;
         })
       ) : (

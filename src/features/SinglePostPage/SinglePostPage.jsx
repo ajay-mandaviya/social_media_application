@@ -5,6 +5,7 @@ import { SinglePost, Comment } from "../../components";
 import { addComment, getsinglePost } from "../Home/postSlice";
 import { useAuth } from "../auth/authSlice";
 import toast from "react-hot-toast";
+import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 export const SinglePostPage = () => {
   const dispatch = useDispatch();
   const { allPosts, post } = useSelector((state) => state.post);
@@ -14,7 +15,9 @@ export const SinglePostPage = () => {
 
   useEffect(() => {
     dispatch(getsinglePost(id));
-  }, [allPosts, id]);
+  }, [allPosts]);
+
+  useDocumentTitle(`Post||${post?.username}`);
 
   return (
     <div>

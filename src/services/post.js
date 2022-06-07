@@ -56,7 +56,7 @@ export const likePostApi = (token, postId) => {
 
 export const disLikePostApi = (token, postID) => {
   return axios.post(
-    `api/posts/dislike/${postID}`,
+    `/api/posts/dislike/${postID}`,
     {},
     {
       headers: {

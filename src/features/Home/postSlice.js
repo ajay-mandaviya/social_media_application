@@ -105,6 +105,7 @@ export const dislikeUserPost = createAsyncThunk(
   "post/disLikePost",
   async (postId, thunkAPI) => {
     try {
+      console.log("dislikeUserPost", postId);
       const token = localStorage.getItem("token");
       const respone = await disLikePostApi(token, postId);
       console.log("dislikeUserPost", respone);
@@ -221,7 +222,7 @@ const postSlice = createSlice({
     loading: false,
     allPosts: [],
     userPosts: [],
-    bookMark: [],
+    bookmarks: [],
     post: null,
   },
   reducers: {},
@@ -284,20 +285,20 @@ const postSlice = createSlice({
     [dislikeUserPost.rejected]: () => {},
     [getBookMarks.pending]: (state) => {},
     [getBookMarks.fulfilled]: (state, action) => {
-      state.bookMark = action.payload.bookmarks;
+      state.bookmarks = action.payload.bookmarks;
     },
 
     [getBookMarks.rejected]: (state) => {},
 
     [addBookMark.pending]: (state) => {},
     [addBookMark.fulfilled]: (state, action) => {
-      state.bookMark = action.payload.bookmarks;
+      state.bookmarks = action.payload.bookmarks;
     },
     [addBookMark.rejected]: (state) => {},
 
     [removeBookMark.pending]: (state) => {},
     [removeBookMark.fulfilled]: (state, action) => {
-      state.bookMark = action.payload.bookmarks;
+      state.bookmarks = action.payload.bookmarks;
     },
     [removeBookMark.rejected]: (state) => {},
     // post

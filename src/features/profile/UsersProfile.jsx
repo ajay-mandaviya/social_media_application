@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { SinglePost } from "../../components";
+import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 import { useAuth } from "../auth/authSlice";
 import { getUserPostThunk } from "../Home/postSlice";
 import { followUser, unfollowUser } from "./userProfileSlice";
@@ -11,7 +12,6 @@ export const UsersProfile = () => {
   const dispatch = useDispatch();
   const { user } = useAuth();
   const { username } = useParams();
-  console.log("username", username);
   const { userPosts, allPosts } = useSelector((state) => state.post);
   const { allUsers, loading } = useSelector((state) => state.userProfile);
   const [singleUser, setSingleUser] = useState({});
@@ -28,6 +28,8 @@ export const UsersProfile = () => {
     (foloUser) => foloUser.username === user.username
   );
 
+  useDocumentTitle(`${singleUser?.firstName} ${singleUser?.lastName}`);
+
   const handleFollow = () => {
     if (isUserInFollowing) {
       dispatch(unfollowUser({ id: singleUser?._id, dispatch }));
@@ -42,8 +44,6 @@ export const UsersProfile = () => {
         });
     }
   };
-
-  console.log("singleUser", singleUser);
   return (
     <>
       <div className="">

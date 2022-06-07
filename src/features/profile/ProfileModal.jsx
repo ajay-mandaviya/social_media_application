@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateUser, useAuth } from "../auth/authSlice";
 import { closeEditModal } from "./userProfileSlice";
 const ProfileModal = () => {
   const dispatch = useDispatch();
   const { user } = useAuth();
   const [initialUser, setInitialUser] = useState({});
-
+  const { bookmarks } = useSelector((state) => state.post);
   useEffect(() => {
     setInitialUser(user);
   }, [user]);
@@ -53,7 +53,7 @@ const ProfileModal = () => {
           <button
             className="btn bg-sky-600 py-1 w-full my-2 border-2 rounded-lg border-blue-400 text-white"
             onClick={() => {
-              dispatch(updateUser(initialUser))
+              dispatch(updateUser({ ...initialUser, bookmarks: bookmarks }))
                 .unwrap()
                 .then(() => {
                   toast.success(`Profile Update SuccessFully`);

@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { Input } from "../../components";
+import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 import { loginUserThunk } from "./authSlice";
 
 export const Login = () => {
@@ -71,6 +72,8 @@ export const Login = () => {
     }
     //eslint-disable-next-line
   }, [token]);
+
+  useDocumentTitle("Login");
 
   return (
     <div className="flex justify-center w-full h-screen items-center bg-gray-100">

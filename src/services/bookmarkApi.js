@@ -1,7 +1,6 @@
 import axios from "axios";
 
 export const getAllBookMarksApi = (token) => {
-  console.log("getAllBookMarksApi", token);
   return axios.get("/api/users/bookmark", {
     headers: {
       authorization: token,
