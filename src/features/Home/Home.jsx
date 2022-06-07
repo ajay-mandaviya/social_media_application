@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { SinglePost } from "../../components";
+import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 import { useAuth } from "../auth/authSlice";
+
 export const Home = () => {
   const { allPosts } = useSelector((state) => state.post);
+
+
   const { user } = useAuth();
   const [sortType, setSortType] = useState("");
   const setPost = () => {
@@ -25,6 +29,9 @@ export const Home = () => {
     }
     return sortPost;
   };
+
+  useDocumentTitle("Feed")
+
   const homePosts = setPost();
   return (
     <div>

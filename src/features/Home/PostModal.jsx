@@ -7,7 +7,6 @@ import { createPostThunk, editUserPostThunk } from "./postSlice";
 export const PostModal = () => {
   const dispatch = useDispatch();
   const { post, isPostEdit } = useSelector((state) => state.postModal);
-  console.log("post content d", post.content);
   const { loading } = useSelector((state) => state.post);
   const handlePostChange = (e) => {
     dispatch(setPostText({ ...post, content: e.target.value }));

@@ -24,7 +24,6 @@ export const editPostCommentAPi = (postId, commentId, commentData, token) => {
 };
 
 export const deletePostCommentAPi = (postId, commentId, token) => {
-  console.log("postid", postId, "commentId", commentId, "token", token);
   return axios.delete(`/api/comments/delete/${postId}/${commentId}`, {
     headers: {
       authorization: token,

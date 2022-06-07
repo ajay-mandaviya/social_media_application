@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SinglePost } from "../../components";
+import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 import { useAuth } from "../auth/authSlice";
 import { getUserPostThunk } from "../Home/postSlice";
 import ProfileModal from "./ProfileModal";
@@ -13,6 +14,8 @@ export const Profile = () => {
   useEffect(() => {
     dispatch(getUserPostThunk(user?.username));
   }, [allPosts, allUsers]);
+
+  useDocumentTitle(`${user?.firstName} ${user?.lastName}`);
 
   return (
     <>

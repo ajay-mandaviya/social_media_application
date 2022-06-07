@@ -16,25 +16,23 @@ export const SinglePost = ({ posts }) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  console.log("path name", pathname);
-
   const { user } = useAuth();
   const postOptionRef = useRef(null);
   const [postOptionVisible, setPostOptionVisible] = useState(false);
 
   const { allUsers } = useSelector((state) => state.userProfile);
-  const { bookMark } = useSelector((state) => state.post);
+  const { bookmarks } = useSelector((state) => state.post);
   const {
     likes: { likedBy },
   } = posts;
 
-  const isPostLike = likedBy.some((like) => like?.username === user.username);
+  const isPostLike = likedBy?.some((like) => like?.username === user.username);
 
   const userProfileInfo = allUsers?.find(
     (user) => user.username === posts.username
   );
 
-  const isInBookMark = bookMark?.some(
+  const isInBookMark = bookmarks?.some(
     (bookpost) => bookpost?._id === posts?._id
   );
 

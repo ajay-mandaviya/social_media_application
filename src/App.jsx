@@ -16,10 +16,11 @@ import { Toaster } from "react-hot-toast";
 import { Container } from "./components";
 import { useEffect } from "react";
 import { useAuth } from "./features/auth/authSlice";
-import { getUserPostThunk } from "./features/Home/postSlice";
+import { getBookMarks, getUserPostThunk } from "./features/Home/postSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUserThunk } from "./features/profile/userProfileSlice";
 import { SinglePostPage } from "./features/SinglePostPage/SinglePostPage";
+
 function App() {
   const dispatch = useDispatch();
   const { isModalVisible } = useSelector((state) => state.postModal);
@@ -33,8 +34,14 @@ function App() {
     }
   }, [token]);
 
+  useEffect(() => {
+    if (token) {
+      dispatch(getBookMarks(token));
+    }
+  }, [token, user]);
+
   return (
-    <div className="bg-gray-100">
+    <div className="bg-gray-100 min-h-screen	">
       {isModalVisible && <PostModal />}
       <Toaster
         position="top-right"
