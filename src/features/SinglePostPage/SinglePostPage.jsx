@@ -9,13 +9,10 @@ export const SinglePostPage = () => {
   const dispatch = useDispatch();
   const { allPosts, post } = useSelector((state) => state.post);
   const { id } = useParams();
-
   const { user, token } = useAuth();
-  // const [singlePost, setSinglePost] = useState(null);
   const [commentData, setCommentText] = useState("");
 
   useEffect(() => {
-    // const post = allPosts.filter((current) => current?._id === id)[0];
     dispatch(getsinglePost(id));
   }, [allPosts, id]);
 
@@ -24,16 +21,17 @@ export const SinglePostPage = () => {
       {post && <SinglePost posts={post} />}
       {post && (
         <div className="flex justify-between items-center bg-white p-2">
-          <img
-            className="h-7 w-7 rounded-full"
-            src={
-              user?.profilePic
-                ? `${user?.profilePic}`
-                : "https://res.clousdinary.com/dgwzpbj4k/image/upload/v1650457790/baatchit/woman_ojbd7v.png"
-            }
-            alt="profilePic"
-          />
-
+          {user?.profilePic ? (
+            <img
+              src={user?.profilePic}
+              className="w-7 h-7 rounded-full"
+              alt="profile img"
+            />
+          ) : (
+            <div className="w-7 h-7  text-xl flex items-center justify-center font-semibold rounded-full bg-blue-400 text-white">
+              {user?.firstName[0]?.toUpperCase()}
+            </div>
+          )}
           <input
             onChange={(e) => setCommentText(e.target.value)}
             value={commentData}
@@ -48,7 +46,6 @@ export const SinglePostPage = () => {
                   postId: id,
                   commentData,
                   token,
-                  
                 })
               )
                 .unwrap()

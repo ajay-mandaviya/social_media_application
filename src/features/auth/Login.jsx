@@ -40,6 +40,7 @@ export const Login = () => {
       .unwrap()
       .then(({ foundUser }) => {
         toast.success(`Hey Welcome Back ${foundUser.username}`);
+        navigate("/");
       })
       .catch((error) => {
         toast.error("Some thing went wrong");
@@ -57,6 +58,7 @@ export const Login = () => {
       .unwrap()
       .then(({ foundUser }) => {
         toast.success(`Hey Welcome Back ${foundUser.username}`);
+        navigate("/");
       })
       .catch((error) => {
         toast.error("Some thing went wrong");
@@ -64,9 +66,10 @@ export const Login = () => {
   };
 
   useEffect(() => {
-    // if (token) {
-    //   navigate("/");
-    // }
+    if (token) {
+      navigate("/");
+    }
+    //eslint-disable-next-line
   }, [token]);
 
   return (

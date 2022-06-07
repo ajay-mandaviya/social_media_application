@@ -13,7 +13,9 @@ export const Signup = () => {
   const [passWordVisible, setPassWordVisible] = useState(false);
 
   const [newUser, setNewUser] = useState({
+    firstName: "",
     username: "",
+    lastName: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -42,10 +44,11 @@ export const Signup = () => {
         .unwrap()
         .then(({ createdUser }) => {
           toast.success(`Hey  ${createdUser.username} Welcome to App `);
+          navigate("/");
         })
         .catch((error) => {
-          console.log("error in signup");
-          toast.error("Some thing went wrong");
+          console.log("error in signup", error.response.data.errors[0]);
+          toast.error(`${error.response.data.errors[0]}`);
         });
     }
   };
@@ -61,9 +64,10 @@ export const Signup = () => {
   };
 
   useEffect(() => {
-    // sif (token)      {
-    //   navigate("/");
-    // }
+    if (token) {
+      navigate("/");
+    }
+    //eslint-disable-next-line
   }, [token]);
 
   return (
@@ -74,6 +78,29 @@ export const Signup = () => {
             <h3 className="text-3xl text-sky-600	">Sign up AppName</h3>
           </div>
           <form onSubmit={handleSignup}>
+            <div className="flex justify-between">
+              <div className="w-2/5">
+                <Input
+                  name={"firstName"}
+                  lable={"First Name"}
+                  value={newUser.firstName}
+                  type={"text"}
+                  placeholder="First Name"
+                  onChange={handleSignpChange}
+                  handleOnFocus={onFocus}
+                />
+              </div>
+              <div className="w-2/5">
+                <Input
+                  name={"lastName"}
+                  lable={"Last Name"}
+                  value={newUser.lastName}
+                  type={"text"}
+                  placeholder="Last Name"
+                  onChange={handleSignpChange}
+                />
+              </div>
+            </div>
             <Input
               name={"username"}
               lable={"User Name"}

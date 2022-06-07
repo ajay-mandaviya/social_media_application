@@ -1,5 +1,5 @@
 import { v4 as uuid } from "uuid";
-import { formatDate } from "../utils/authUtils";
+// import { formatDate } from "../utils/authUtils";
 
 /**
  * Posts can be added here.
@@ -17,8 +17,8 @@ export const posts = [
       dislikedBy: [],
     },
     username: "adarshbalika",
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
+    createdAt: "2022-02-01T22:02:14+05:30",
+    updatedAt: "2022-02-01T22:02:14+05:30",
     comments: [
       {
         _id: uuid(),
@@ -54,7 +54,7 @@ export const posts = [
       },
     ],
     createdAt: "2022-01-01T22:02:14+05:30",
-    updatedAt: formatDate(),
+    updatedAt: "2022-01-01T22:02:14+05:30",
   },
   {
     _id: uuid(),
@@ -86,8 +86,8 @@ export const posts = [
         },
       },
     ],
-    createdAt: "2022-04-28T22:02:14+05:30",
-    updatedAt: formatDate(),
+    createdAt: "2022-02-01T22:02:14+05:30",
+    updatedAt: "2022-02-01T22:02:14+05:30",
   },
   {
     _id: uuid(),
@@ -98,8 +98,8 @@ export const posts = [
       dislikedBy: [],
     },
     username: "guest123",
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
+    createdAt: "2021-12-01T22:02:14+05:30",
+    updatedAt: "2021-12-01T22:02:14+05:30",
     comments: [
       {
         _id: uuid(),
@@ -121,8 +121,8 @@ export const posts = [
       dislikedBy: [],
     },
     username: "elonmusk",
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
+    createdAt: "2021-10-01T22:02:14+05:30",
+    updatedAt: "2021-10-01T22:02:14+05:30",
     comments: [
       {
         _id: uuid(),
@@ -144,8 +144,8 @@ export const posts = [
       dislikedBy: [],
     },
     username: "ankittailor_",
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
+    createdAt: "2022-05-01T22:02:14+05:30",
+    updatedAt: "2022-05-01T22:02:14+05:30",
     comments: [
       {
         _id: uuid(),

@@ -16,7 +16,6 @@ export const users = [
     password: "adarshBalika123",
     userBio: "this is adarshbalika you can find me every where as guest",
     userWebsite: "https://adarshbalika.netlify.app",
-
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
@@ -26,58 +25,7 @@ export const users = [
     lastName: "mandaviya",
     username: "ajay",
     password: "ajay123",
-    userBio: "this is adarshbalika you can find me every where as guest",
-    following: [
-      {
-        _id: uuid(),
-        firstName: "Sarah",
-        lastName: "Walkman",
-        username: "SarahW",
-        avatarURL:
-          "https://res.cloudinary.com/dodkrr6ce/image/upload/v1652181470/socmedia/pic2_vfqvfn.jpg",
-      },
-      {
-        _id: uuid(),
-        firstName: "Lizzie",
-        lastName: "Anne",
-        username: "itsLizzie",
-        avatarURL:
-          "https://res.cloudinary.com/dodkrr6ce/image/upload/v1652181762/socmedia/pic4_dtzqlj.jpg",
-      },
-      {
-        firstName: "Jane",
-        lastName: "Doe",
-        username: "janedoe",
-        avatarURL:
-          "https://res.cloudinary.com/dodkrr6ce/image/upload/v1652181761/socmedia/pic3_py263g.jpg",
-      },
-      {
-        firstName: "Anna",
-        lastName: "Baker",
-        username: "annahere",
-        avatarURL:
-          "https://res.cloudinary.com/dodkrr6ce/image/upload/v1652181889/socmedia/pic5_qq8ne3.jpg",
-      },
-    ],
-    followers: [
-      {
-        _id: uuid(),
-        firstName: "Sarah",
-        lastName: "Walkman",
-        username: "SarahW",
-        avatarURL:
-          "https://res.cloudinary.com/dodkrr6ce/image/upload/v1652181470/socmedia/pic2_vfqvfn.jpg",
-      },
-
-      {
-        _id: uuid(),
-        firstName: "Lizzie",
-        lastName: "Anne",
-        username: "itsLizzie",
-        avatarURL:
-          "https://res.cloudinary.com/dodkrr6ce/image/upload/v1652181762/socmedia/pic4_dtzqlj.jpg",
-      },
-    ],
+    userBio: "Learning ReactJS",
     userWebsite: "https://adarshbalika.netlify.app",
     profilePic:
       "https://pbs.twimg.com/profile_images/1421500413174456323/e4ayMO4F_400x400.jpg",
