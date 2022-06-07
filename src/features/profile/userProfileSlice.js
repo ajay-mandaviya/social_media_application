@@ -18,7 +18,9 @@ const userSliceProfile = createSlice({
   name: "userProfile",
   initialState: {
     allUsers: [],
+    bookMark: [],
     loading: false,
+    user: {},
   },
   reducers: {},
   extraReducers: {
