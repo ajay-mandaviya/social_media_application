@@ -78,7 +78,7 @@ export const Signup = () => {
       <div className="flex justify-center w-full min-h-[100vh] items-center bg-gray-100 p-6">
         <div className="bg-white p-4 w-96 mt-8 h-full">
           <div className="text-center">
-            <h3 className="text-3xl text-sky-600	">Sign up AppName</h3>
+            <h3 className="text-3xl text-sky-600	">Sign up Text Talk</h3>
           </div>
           <form onSubmit={handleSignup}>
             <div className="flex justify-between">

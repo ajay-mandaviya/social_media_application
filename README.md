@@ -39,4 +39,6 @@ Application Link
 - Book Mark Page
   - Show all book mark post
 - Profile Page
-  -User Can Update Profile
+  - User Can Update Profile
+- Post Page
+  - See All the comments on post and add delete edit comments

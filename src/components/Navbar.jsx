@@ -7,7 +7,7 @@ export const Navbar = () => {
 
   return (
     <div className="flex h-14  bg-white shadow-md		 p-4 justify-between items-center sticky top-0 left-0 z-10">
-      <div>App Name</div>
+      <div className="font-bold text-2xl cursor-default text-indigo-600">Text Talk</div>
       <div>
         <div className="border-2  p-1 ">
           <i className="fas fa-search   " />
