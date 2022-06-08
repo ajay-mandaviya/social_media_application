@@ -1,8 +1,8 @@
-# Social Media Application
+# Text Talk Social Media Application
 
 Application Link
 
-[My Stream]()
+[My Stream](https://text-talk.netlify.app/login)
 
 # Built with
 
