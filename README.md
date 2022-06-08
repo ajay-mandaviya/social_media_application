@@ -2,7 +2,7 @@
 
 Application Link
 
-[My Stream](https://text-talk.netlify.app/login)
+[Text Talk](https://text-talk.netlify.app/)
 
 # Built with
 
